@@ -1,0 +1,61 @@
+syntax = "proto3";
+package proto;
+import "google/api/annotations.proto";
+option java_multiple_files = true;
+
+service FakeBookService {
+    rpc AddFakeNews (FakeNewsRequestWrapper) returns (FakeNewsResponse) {
+        option (google.api.http) = {
+             post:"/api/v1/fakenews"
+             body: "fakeNewsRequest"
+         };
+    }
+    rpc DeleteFakeNews (FakeNewsRequestWrapper) returns (FakeNewsResponse) {
+        option (google.api.http) = {
+             post:"/api/v1/removefakenews"
+             body: "fakeNewsRequest"
+         };
+    }
+    rpc RateFakeNews (RatingRequestWrapper) returns (FakeNewsResponse) {
+        option (google.api.http) = {
+             post:"/api/v1/rate"
+             body: "ratingRequest"
+         };
+    }
+    rpc ViewFakeNews (FakeNewsId) returns (FakeNewsResponse) {
+        option (google.api.http).get = "/api/v1/fakenews/{newsId}";
+    }
+    rpc HealthCheck (HealthRequest) returns (HealthReply) {
+        option (google.api.http).get = "/internal/health";
+    }
+}
+
+message HealthRequest{}
+message HealthReply{
+    string status = 1;
+}
+message FakeNewsRequestWrapper {
+    FakeNewsRequest fakeNewsRequest = 1;
+}
+message RatingRequestWrapper {
+    RatingRequest ratingRequest = 1;
+}
+message FakeNewsRequest {
+    string id = 1;
+    string userId = 2;
+    string fakeNewsUrl = 3;
+}
+message RatingRequest {
+    string id = 1;
+    string fakeNewsId = 2;
+    string rating = 3;
+}
+message FakeNewsId {
+    string id = 1;
+    string newsId = 2;
+}
+message FakeNewsResponse {
+    string id = 1;
+    string fakeNewsUrl = 2;
+    string rating = 3;
+}
