@@ -7,13 +7,13 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
 	"os"
-	grpc_server "projects/TheFakeBook/internal/server"
+	grpc_server "projects/TheFakeBook/pkg/server"
 )
 
 const (
-	grpcPort     = 9981
+	grpcPort           = 9981
 	gatewayServicePort = 8083
-	host         = "localhost"
+	host               = "localhost"
 )
 
 func main() {

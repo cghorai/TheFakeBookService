@@ -3,7 +3,7 @@ project_name=fakebookservice #Make sure this is same as your proto file name
 grpc=./api/proto/v1 #Change this if you have placed your protobuf file in a different directory
 protoFile=${grpc}/${project_name}.proto #Your proto file
 pbFile=${grpc}/${project_name}.pb.go #Your generated pb.go file
-pbDest=./pkg/service #Where your pb and gateway go file be copied to
+pbDest=./pkg/server #Where your pb and gateway go file be copied to
 
 echo "Generating ${project_name}.pb.go"
 protoc -I/usr/local/include -I. \

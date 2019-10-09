@@ -10,7 +10,6 @@ import (
 	"google.golang.org/grpc"
 	"log"
 	"net/http"
-	proto "projects/TheFakeBook/pkg/service"
 )
 
 type GrpcGatewayParams struct {
@@ -31,7 +30,7 @@ func StartGatewayProxy(params GrpcGatewayParams) {
 	opts := []grpc.DialOption{grpc.WithInsecure()}
 
 	getMethod := fmt.Sprintf("%v:%v", params.Host, params.GrpcPort)
-	err := proto.RegisterFakeBookServiceHandlerFromEndpoint(ctx, mux, getMethod, opts)
+	err := RegisterFakeBookServiceHandlerFromEndpoint(ctx, mux, getMethod, opts)
 	if err != nil {
 		log.Fatal(errors.Wrap(err, "Failed to register endpoint \n"))
 	}
