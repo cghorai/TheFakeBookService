@@ -50,10 +50,12 @@ func StartService(in StartServiceInput) {
 }
 
 func (s *server) AddFakeNews(ctx context.Context, input *FakeNewsRequestWrapper) (response *FakeNewsResponse, err error) {
+
 	id, err := s.serviceHandler.AddFakeNews(input.FakeNewsRequest.UserId, input.FakeNewsRequest.FakeNewsUrl)
 	if err != nil {
 		return nil, err
 	}
+	response = new(FakeNewsResponse)
 	response.Id = id
 	return response, nil
 }
